@@ -8,13 +8,11 @@
         <div class="col">
           <h2><strong>Makanan Terlaris</strong></h2>
         </div>
-        
-        <div class="col-5"></div>
         <div class="col-2">
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-warning" type="button">Lihat Semua
-              <i class="fas fa-eye"></i>
-            </a>
+            <router-link class="btn btn-md btn-warning" to="/makanan"
+              >Lihat Semua <i class="fas fa-eye"></i
+            ></router-link>
           </div>
         </div>
       </div>

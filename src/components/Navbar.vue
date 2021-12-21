@@ -18,7 +18,7 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/pesananku">Pesananku
           <span class="	fas fa-shopping-cart"></span>
-          <span class="badge rounded-pill bg-warning">2</span>
+          <span class="badge bg-warning">2</span>
           </router-link>          
         </li>
       </ul>

@@ -22,3 +22,25 @@
     border-radius: 20px; 
 }
 
+.badge{
+    border-radius: 20px;     
+}
+
+.img-fluid{
+    border-radius: 20px;       
+}
+
+.harga{
+    font-size: 1.4em;
+    color: #ffc107;
+}
+
+.harga-card{
+    font-size: 1em;
+    color: #ffc107;
+}
+
+.harga-palsu{
+    text-decoration: line-through red;
+    color: black;
+}

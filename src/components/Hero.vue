@@ -4,7 +4,7 @@
         <div class="d-flex h-100">
         <div class="justify-content-center align-self-center">
             <h2>Tidak perlu menunggu pelayan untuk memesan makanan<br><strong>Pesan makananmu disini!</strong></h2>
-        <button class="btn btn-lg btn-warning">Mau Pesan</button>
+        <router-link class="btn btn-lg btn-warning" to="/makanan">Mau Pesan</router-link>
         </div>
         </div>
     </div>
