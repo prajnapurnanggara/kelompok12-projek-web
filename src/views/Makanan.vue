@@ -18,12 +18,8 @@
               aria-label="Mau makan apa hari ini?"
               aria-describedby="button-addon2"
             />
-            <button
-              class="btn btn-warning"
-              type="button"
-              id="button-addon2"
-            >
-            Cari
+            <button class="btn btn-warning" type="button" id="button-addon2">
+              Cari
             </button>
           </div>
         </div>

@@ -34,14 +34,6 @@
               <input type="number" class="form-control mt-1" />
             </div>
             <div class="form-group mt-3">
-              <label><strong>Level Kepedasan</strong></label>
-              <input
-                type="number"
-                class="form-control mt-1"
-                placeholder="Level 0 - 10"
-              />
-            </div>
-            <div class="form-group mt-3">
               <label><strong>Catatan Untuk Pesanan</strong></label>
               <textarea
                 placeholder="Contoh: Tanpa sayur kangkung ya!"
