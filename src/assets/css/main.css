@@ -1,0 +1,24 @@
+.router-link-exact-active{
+    font-weight: bold;
+}
+
+#app{
+    font-family: 'Happy Monkey', cursive;
+}
+
+.product-card{
+    border-radius: 20px;
+}
+
+.card-img-top{
+    border-radius: 20px;    
+}
+
+.form-control{
+    border-radius: 20px; 
+}
+
+.btn-warning{
+    border-radius: 20px; 
+}
+
