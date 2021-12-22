@@ -36,8 +36,8 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from "@/components/Navbar.vue";
-import ProductCard from "@/components/ProductCard.vue";
+import Navbar from "../../components/user/Navbar.vue";
+import ProductCard from "../../components/user/ProductCard.vue";
 
 export default {
   name: "Home",

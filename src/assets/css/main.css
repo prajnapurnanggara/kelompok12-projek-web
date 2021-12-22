@@ -22,6 +22,10 @@
     border-radius: 20px; 
 }
 
+.btn-danger{
+    border-radius: 20px; 
+}
+
 .badge{
     border-radius: 20px;     
 }

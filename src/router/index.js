@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Makanan from '../views/Makanan.vue'
-import Pesananku from '../views/Pesananku.vue'
-import DetailMakanan from '../views/DetailMakanan.vue'
+import Home from '../views/user/Home.vue'
+import Makanan from '../views/user/Makanan.vue'
+import Pesananku from '../views/user/Pesananku.vue'
+import DetailMakanan from '../views/user/DetailMakanan.vue'
 
 const routes = [
   {

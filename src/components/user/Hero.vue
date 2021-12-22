@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="col">
-        <img src="../assets/img/hero.svg" width="400">
+        <img src="../../assets/img/hero.svg" width="400">
     </div>
 </div>
 </template>
