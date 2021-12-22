@@ -44,3 +44,16 @@
     text-decoration: line-through red;
     color: black;
 }
+
+.table th{
+    text-align: center;
+    background-color:#e6e4e465;
+}
+
+.table td{
+    text-align: center;
+}
+
+.table tfoot{
+    background-color:#e6e4e465;
+}
