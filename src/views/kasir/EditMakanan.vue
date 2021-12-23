@@ -2,7 +2,6 @@
   <div class="content">
     <NavbarKasir />
     <div class="container">
-
       <div class="row mt-4 mb-2">
         <div class="col">
           <h1>Edit Makanan</h1>

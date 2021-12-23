@@ -34,7 +34,7 @@
               <td>3</td>
               <td>Rp 30.000</td>
               <td>1 tanpa sayur kangkung, semuanya cabe 2</td>
-              <td><a class="btn btn-icon btn-danger"><i class="fas fa-trash"></i></a></td>
+              <td><a class="btn btn-icon btn-outline-danger"><i class="fas fa-trash"></i></a></td>
             </tr>
           </tbody>
           <tfoot>

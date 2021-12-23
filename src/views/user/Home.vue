@@ -3,7 +3,6 @@
     <Navbar />
     <div class="container">
       <Hero />
-
       <div class="row mt-4 mb-2">
         <div class="col">
           <h2><strong>Makanan Terlaris</strong></h2>
