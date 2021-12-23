@@ -1,63 +1,70 @@
-.router-link-exact-active{
+.router-link-exact-active {
     font-weight: bold;
 }
 
-#app{
+#app {
     font-family: 'Happy Monkey', cursive;
 }
 
-.product-card{
+.product-card {
     border-radius: 20px;
 }
 
-.card-img-top{
-    border-radius: 20px;    
+.card-img-top {
+    border-radius: 20px;
 }
 
-.form-control{
-    border-radius: 20px; 
+.form-control {
+    border-radius: 20px;
 }
 
-.btn-warning{
-    border-radius: 20px; 
+.btn-warning {
+    border-radius: 20px;
 }
 
-.btn-danger{
-    border-radius: 20px; 
+.btn-danger {
+    border-radius: 20px;
 }
 
-.badge{
-    border-radius: 20px;     
+.badge {
+    border-radius: 20px;
 }
 
-.img-fluid{
-    border-radius: 20px;       
+.img-fluid {
+    border-radius: 20px;
 }
 
-.harga{
+.harga {
     font-size: 1.4em;
     color: #ffc107;
 }
 
-.harga-card{
+.harga-card {
     font-size: 1em;
     color: #ffc107;
 }
 
-.harga-palsu{
+.harga-palsu {
     text-decoration: line-through red;
     color: black;
 }
 
-.table th{
+.table th {
     text-align: center;
-    background-color:#e6e4e465;
+    background-color: #e6e4e465;
 }
 
-.table td{
+.table td {
     text-align: center;
 }
 
-.table tfoot{
-    background-color:#e6e4e465;
+.table tfoot {
+    background-color: #e6e4e465;
 }
+
+.content {
+    min-height: calc(100vh - 70px);
+  }
+.footer {
+    height: 50px;
+  } 

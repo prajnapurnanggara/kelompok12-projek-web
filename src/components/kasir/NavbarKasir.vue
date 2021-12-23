@@ -8,17 +8,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link class="nav-link" to="/home">Home</router-link>          
+          <router-link class="nav-link" to="/pesanan">Pesanan</router-link>          
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/makanan">Makanan</router-link>
+          <router-link class="nav-link" to="/editmakanan">Makanan</router-link>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link class="nav-link" to="/pesananku">Pesananku
+          <router-link class="nav-link" to="/">Kasir
           <span class="	fas fa-shopping-cart"></span>
-          <span class="badge bg-warning">2</span>
           </router-link>          
         </li>
       </ul>
@@ -29,7 +28,7 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: "NavbarKasir",
 };
 </script>
 
