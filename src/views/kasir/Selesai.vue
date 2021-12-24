@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row mt-4 mb-2">
         <div class="col">
-          <h2>Pesanan - Dipesan</h2>
+          <h2>Pesanan - Selesai</h2>
           <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
             <div class="btn-group" role="group" aria-label="Basic example">
               <router-link class="btn btn-warning" to="/pesanan">Dipesan</router-link>
@@ -31,8 +31,8 @@
               <td>Otto</td>
               <td>12</td>
               <td>
-                <span class="badge rounded-pill bg-warning text-dark"
-                  >Dipesan</span
+                <span class="badge rounded-pill bg-success"
+                  >Selesai</span
                 >
               </td>
               <td>
@@ -52,7 +52,7 @@
 import NavbarKasir from "../../components/kasir/NavbarKasir.vue";
 
 export default {
-  name: "Pesanan",
+  name: "Selesai",
   components: {
     NavbarKasir,
   },
