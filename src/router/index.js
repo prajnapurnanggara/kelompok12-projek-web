@@ -8,6 +8,8 @@ import Dibayar from '../views/kasir/Dibayar.vue'
 import Selesai from '../views/kasir/Selesai.vue'
 import EditMakanan from '../views/kasir/EditMakanan.vue'
 import DetailPesanan from '../views/kasir/DetailPesanan.vue'
+import FormEditMakanan from '../views/kasir/FormEditMakanan.vue'
+import TambahMakanan from '../views/kasir/TambahMakanan.vue'
 
 
 const routes = [
@@ -55,6 +57,16 @@ const routes = [
     path: '/detailpesanan',
     name: 'DetailPesanan',
     component: DetailPesanan  
+  },
+  {
+    path: '/formeditmakanan',
+    name: 'FormEditMakanan',
+    component: FormEditMakanan  
+  },
+  {
+    path: '/tambahmakanan',
+    name: 'TambahMakanan',
+    component: TambahMakanan  
   }
 ]
 
