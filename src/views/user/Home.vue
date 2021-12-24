@@ -23,6 +23,7 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
@@ -30,6 +31,7 @@
 import Navbar from "../../components/user/Navbar.vue";
 import Hero from "../../components/user/Hero.vue";
 import ProductCard from "../../components/user/ProductCard.vue";
+import Footer from "@/components/user/Footer.vue";
 
 export default {
   name: "Home",
@@ -37,6 +39,7 @@ export default {
     Navbar,
     Hero,
     ProductCard,
+    Footer
   },
 };
 </script>

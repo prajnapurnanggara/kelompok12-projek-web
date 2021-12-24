@@ -50,16 +50,19 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "../../components/user/Navbar.vue";
+import Footer from "../../components/user/Footer.vue";
 
 export default {
   name: "DetailMakanan",
   components: {
     Navbar,
+    Footer
   },
 };
 </script>

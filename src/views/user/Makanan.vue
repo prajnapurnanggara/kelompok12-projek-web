@@ -32,18 +32,21 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "../../components/user/Navbar.vue";
 import ProductCard from "../../components/user/ProductCard.vue";
+import Footer from "@/components/user/Footer.vue";
 
 export default {
   name: "Home",
   components: {
     Navbar,
     ProductCard,
+    Footer
   },
 };
 </script>

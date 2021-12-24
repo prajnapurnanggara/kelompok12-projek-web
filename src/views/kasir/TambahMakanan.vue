@@ -17,18 +17,21 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "../../components/kasir/NavbarKasir.vue";
 import CardTambahMakanan from "../../components/kasir/CardTambahMakanan.vue";
+import Footer from "@/components/user/Footer.vue";
 
 export default {
   name: "FormEditMakanan",
   components: {
     Navbar,
-    CardTambahMakanan
+    CardTambahMakanan,
+    Footer
   },
 };
 </script>

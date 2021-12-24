@@ -17,18 +17,21 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "../../components/kasir/NavbarKasir.vue";
 import DetailCard from "../../components/kasir/DetailCard.vue";
+import Footer from "@/components/user/Footer.vue";
 
 export default {
   name: "DetailPesanan",
   components: {
     Navbar,
-    DetailCard
+    DetailCard,
+    Footer
   },
 };
 </script>

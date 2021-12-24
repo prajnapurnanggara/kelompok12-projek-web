@@ -45,16 +45,19 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 // @ is an alias to /src
 import NavbarKasir from "../../components/kasir/NavbarKasir.vue";
+import Footer from "@/components/user/Footer.vue";
 
 export default {
   name: "Selesai",
   components: {
     NavbarKasir,
+    Footer
   },
 };
 </script>

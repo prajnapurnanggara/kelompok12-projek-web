@@ -10,6 +10,7 @@ import EditMakanan from '../views/kasir/EditMakanan.vue'
 import DetailPesanan from '../views/kasir/DetailPesanan.vue'
 import FormEditMakanan from '../views/kasir/FormEditMakanan.vue'
 import TambahMakanan from '../views/kasir/TambahMakanan.vue'
+import LoginKasir from '../views/kasir/LoginKasir.vue'
 
 
 const routes = [
@@ -67,6 +68,11 @@ const routes = [
     path: '/tambahmakanan',
     name: 'TambahMakanan',
     component: TambahMakanan  
+  },
+  {
+    path: '/loginkasir',
+    name: 'LoginKasir',
+    component: LoginKasir  
   }
 ]
 
