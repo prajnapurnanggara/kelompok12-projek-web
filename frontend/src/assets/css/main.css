@@ -8,6 +8,7 @@
 
 .product-card {
     border-radius: 20px;
+    width: 288px;
 }
 
 .detail-card {
@@ -15,7 +16,8 @@
 }
 
 .card-img-top {
-    border-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 .form-control {
@@ -76,12 +78,27 @@
 
 .content {
     min-height: calc(100vh - 70px);
-  }
+}
+
 .footer {
     height: 50px;
-  }
+}
 
 .tabledetail {
     table-layout: fixed;
     word-wrap: break-word;
-  }
+}
+
+.card-deskripsi {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.upload {
+    display: none;
+}

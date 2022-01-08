@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="content">
     <Navbar />
     <div class="container">
@@ -13,20 +14,18 @@
       <div class="row mt-4">
         <div class="col-md-6">
           <img
-            src="https://i.ytimg.com/vi/9qYtYm7HddM/maxresdefault.jpg"
+            :src="'assets/makanan/'+product.file"
             class="img-fluid shadow"
           />
         </div>
         <div class="col-md-6">
-          <h2><strong>Tipat Cantok</strong></h2>
+          <h2><strong>{{ product.nama }}</strong></h2>
           <h5 class="harga">
-            Rp 10.000 <span class="harga-palsu">Rp 12.000</span>
+            Rp. {{ product.hargaasli }} <span class="harga-palsu">Rp. {{ product.hargapalsu }}</span>
           </h5>
           <hr />
           <p class="card-text">
-            Tipat dan tahu yang dicampur dengan sayur kangkung dan tauge dan
-            disiram dengan bumbu kacang yang ditaburi dengan perasan jeruk nipis
-            dan tambahan kerupuk sebagai pendamping.
+            {{ product.deskripsi }}
           </p>
           <form>
             <div class="form-group mt-3">
@@ -51,18 +50,36 @@
     </div>
   </div>
   <Footer/>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "../../components/user/Navbar.vue";
 import Footer from "../../components/user/Footer.vue";
+import axios from 'axios';
 
 export default {
   name: "DetailMakanan",
   components: {
     Navbar,
     Footer
+  },
+  data() {
+    return {
+      product: []
+    };
+  },
+  methods: {
+    setProducts(data) {
+      this.product = data;
+    },
+  },
+  mounted() {
+    axios
+      .get("http://localhost:8080/api/makanan/"+this.$route.params.id)
+      .then((response) => this.setProducts(response.data))
+      .catch((error) => console.log("Gagal", error));
   },
 };
 </script>

@@ -8,6 +8,8 @@ import Dibayar from '../views/kasir/Dibayar.vue'
 import Selesai from '../views/kasir/Selesai.vue'
 import EditMakanan from '../views/kasir/EditMakanan.vue'
 import DetailPesanan from '../views/kasir/DetailPesanan.vue'
+import DetailDibayar from '../views/kasir/DetailDibayar.vue'
+import DetailSelesai from '../views/kasir/DetailSelesai.vue'
 import FormEditMakanan from '../views/kasir/FormEditMakanan.vue'
 import TambahMakanan from '../views/kasir/TambahMakanan.vue'
 import LoginKasir from '../views/kasir/LoginKasir.vue'
@@ -30,7 +32,7 @@ const routes = [
     component: Pesananku
   },
   {
-    path: '/detailmakanan',
+    path: '/makanan/:id',
     name: 'DetailMakanan',
     component: DetailMakanan
   },
@@ -55,12 +57,22 @@ const routes = [
     component: Selesai  
   },
   {
-    path: '/detailpesanan',
+    path: '/pesanan/:id',
     name: 'DetailPesanan',
     component: DetailPesanan  
   },
   {
-    path: '/formeditmakanan',
+    path: '/dibayar/:id',
+    name: 'DetailDibayar',
+    component: DetailDibayar  
+  },
+  {
+    path: '/selesai/:id',
+    name: 'DetailSelesai',
+    component: DetailSelesai  
+  },
+  {
+    path: '/editmakanan/:id',
     name: 'FormEditMakanan',
     component: FormEditMakanan  
   },
@@ -72,7 +84,7 @@ const routes = [
   {
     path: '/loginkasir',
     name: 'LoginKasir',
-    component: LoginKasir  
+    component: LoginKasir   
   }
 ]
 

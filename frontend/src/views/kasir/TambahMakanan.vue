@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="content">
     <Navbar />
     <div class="container">
@@ -18,6 +19,7 @@
     </div>
   </div>
   <Footer/>
+</div>
 </template>
 
 <script>
@@ -32,6 +34,19 @@ export default {
     Navbar,
     CardTambahMakanan,
     Footer
+  },
+data() {
+    return {
+      products: [],
+      search: [],
+    };
+  },
+  methods: {
+    setProducts(data) {
+      this.products = data;
+    },
+  },
+  mounted() {
   },
 };
 </script>

@@ -3,26 +3,73 @@
     <div class="card-body">
       <h5 class="card-title"><strong>Tambah Makanan</strong></h5>
       <hr />
-      <form>
+      <form @submit.prevent="addProduct">
         <div class="form-group mt-3">
-          <label><strong>Nama</strong></label>
-          <input type="text" class="form-control mt-1" />
+          <label for="id"><strong>ID</strong></label>
+          <input
+            type="text"
+            class="form-control mt-1"
+            id="id"
+            name="id"
+            v-model="product.id"
+          />
         </div>
         <div class="form-group mt-3">
-          <label><strong>Deskripsi</strong></label>
-          <textarea class="form-control mt-1"></textarea>
+          <label for="nama"><strong>Nama</strong></label>
+          <input
+            type="text"
+            class="form-control mt-1"
+            id="nama"
+            name="nama"
+            v-model="product.nama"
+          />
         </div>
         <div class="form-group mt-3">
-          <label><strong>Harga Asli</strong></label>
-          <input type="number" class="form-control mt-1" />
+          <label for="deskripsi"><strong>Deskripsi</strong></label>
+          <textarea
+            class="form-control mt-1"
+            id="deskripsi"
+            name="deskripsi"
+            v-model="product.deskripsi"
+          ></textarea>
         </div>
         <div class="form-group mt-3">
-          <label><strong>Harga Palsu</strong></label>
-          <input type="number" class="form-control mt-1" />
+          <label for="hargaasli"><strong>Harga Asli</strong></label>
+          <input
+            type="number"
+            class="form-control mt-1"
+            id="hargaasli"
+            name="hargaasli"
+            v-model="product.hargaasli"
+          />
         </div>
         <div class="form-group mt-3">
-          <label><strong>Upload</strong></label>
-          <input type="number" class="form-control mt-1" />
+          <label for="hargapalsu"><strong>Harga Palsu</strong></label>
+          <input
+            type="number"
+            class="form-control mt-1"
+            id="hargapalsu"
+            name="hargapalsu"
+            v-model="product.hargapalsu"
+          />
+        </div>
+        <div class="form-group mt-3">
+          <label><strong>Foto</strong></label
+          ><br />
+
+          <label class="btn-sm btn-warning mt-2"
+            ><strong>Upload Foto</strong>
+            <input
+              class="form-control upload"
+              type="file"
+              name="file"
+              id="file"
+              @change="onFileSelected"
+            />
+          </label>
+            <span>
+              {{ file }}
+            </span>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <button type="submit" class="btn btn-warning mt-4">Tambah</button>
@@ -33,8 +80,45 @@
 </template>s
 
 <script>
-export default {};
-</script>
+import axios from "axios";
 
-<style>
-</style>
+export default {
+  data() {
+    return {
+      product: {
+        id: "",
+        nama: "",
+        deskripsi: "",
+        hargaasli: "",
+        hargapalsu: "",
+      },
+      file: '',
+    };
+  },
+  methods: {
+    addProduct() {
+      const product = {
+        id: this.product.id,
+        nama: this.product.nama,
+        deskripsi: this.product.deskripsi,
+        hargaasli: this.product.hargaasli,
+        hargapalsu: this.product.hargapalsu,
+        file: this.file
+      }
+
+      axios
+        .post("http://localhost:8080/api/makanan", product)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    onFileSelected(e) {
+      this.file = e.target.files[0].name;
+      console.log(typeof this.files);
+    },
+  },
+};
+</script>

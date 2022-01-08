@@ -14,13 +14,6 @@
           <router-link class="nav-link" to="/editmakanan">Makanan</router-link>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">Kasir
-          <span class="	fas fa-shopping-cart"></span>
-          </router-link>          
-        </li>
-      </ul>
     </div>
   </div>
 </nav>
