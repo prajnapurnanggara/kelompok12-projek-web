@@ -82,8 +82,8 @@ Tutorial.getAll = (title, result) => {
 
 Tutorial.updateById = (id, tutorial, result) => {
   sql.query(
-    "UPDATE makanan SET id = ?, deskripsi = ?, hargaasli = ?, hargapalsu = ? WHERE id = ?",
-    [tutorial.id, tutorial.deskripsi, tutorial.hargaasli, tutorial.hargapalsu, id],
+    "UPDATE makanan SET nama = ?, deskripsi = ?, hargaasli = ?, hargapalsu = ?, file = ? WHERE id = ?",
+    [tutorial.nama, tutorial.deskripsi, tutorial.hargaasli, tutorial.hargapalsu, tutorial.file, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

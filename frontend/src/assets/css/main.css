@@ -3,7 +3,7 @@
 }
 
 #app {
-    font-family: 'Happy Monkey', cursive;
+    font-family: 'Jost', sans-serif;
 }
 
 .product-card {
@@ -73,6 +73,7 @@
 }
 
 .table tfoot {
+    align-items: center;
     background-color: #e6e4e465;
 }
 
