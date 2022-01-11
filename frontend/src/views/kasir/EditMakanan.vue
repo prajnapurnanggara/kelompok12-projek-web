@@ -16,10 +16,11 @@
                 <th scope="col" width="3%">ID</th>
                 <th scope="col" width="17%"></th>
                 <th scope="col" width="10%">Nama</th>
-                <th scope="col" width="40%">Deskripsi</th>
+                <th scope="col" width="35%">Deskripsi</th>
                 <th scope="col" width="10%">Harga Asli</th>
                 <th scope="col" width="10%">Harga Palsu</th>
-                <th scope="col" width="10%"></th>
+                <th scope="col" width="10%">Status</th>
+                <th scope="col" width="5%"></th>
               </tr>
             </thead>
             <tbody v-for="product in products" :key="product.id">
@@ -38,6 +39,7 @@
                 </td>
                 <td>Rp. {{ product.hargaasli }}</td>
                 <td>Rp. {{ product.hargapalsu }}</td>
+                <td>{{ product.status }}</td>
                 <td>
                   <router-link
                     class="btn btn-icon btn-outline-dark"
@@ -76,8 +78,9 @@ export default {
     setProducts(data) {
       this.products = data;
     },
-    delProducts(data) {
-      axios.delete("http://localhost:8080/api/makanan/", data);
+    delProducts() {
+      this.products
+      axios.delete(`http://localhost:8080/api/makanan/`);
     },
   },
   mounted() {

@@ -67,9 +67,9 @@
               @change="onFileSelected"
             />
           </label>
-            <span>
-              {{ file }}
-            </span>
+          <span>
+            {{ file }}
+          </span>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <button type="submit" class="btn btn-warning mt-4">Tambah</button>
@@ -92,9 +92,11 @@ export default {
         hargaasli: "",
         hargapalsu: "",
       },
-      file: '',
+      file: "",
+      lastid: "",
     };
   },
+
   methods: {
     addProduct() {
       const product = {
@@ -103,8 +105,8 @@ export default {
         deskripsi: this.product.deskripsi,
         hargaasli: this.product.hargaasli,
         hargapalsu: this.product.hargapalsu,
-        file: this.file
-      }
+        file: this.file,
+      };
 
       axios
         .post("http://localhost:8080/api/makanan", product)
@@ -119,6 +121,15 @@ export default {
       this.file = e.target.files[0].name;
       console.log(typeof this.files);
     },
+    setLast(lastdata) {
+      this.lastid = lastdata;
+    },
+  },
+  mounted() {
+    axios
+      .get("http://localhost:8080/api/makanan/last")
+      .then((response) => this.lastdata(response.data))
+      .catch((error) => console.log("Gagal", error));
   },
 };
 </script>

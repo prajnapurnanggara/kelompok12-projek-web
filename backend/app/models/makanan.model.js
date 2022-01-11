@@ -7,6 +7,7 @@ const Tutorial = function(tutorial) {
   this.deskripsi = tutorial.deskripsi;
   this.hargaasli = tutorial.hargaasli;
   this.hargapalsu = tutorial.hargapalsu;
+  this.status = tutorial.status;
   this.file = tutorial.file;
 };
 
@@ -61,6 +62,63 @@ Tutorial.findByNama = (nama, result) => {
   });
 };
 
+Tutorial.getBestseller = (title, result) => {
+  let query = "SELECT * FROM makanan WHERE status = 'Best Seller'";
+
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
+Tutorial.getTersedia = (title, result) => {
+  let query = "SELECT * FROM makanan WHERE status = 'Tersedia'";
+
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
+Tutorial.getMenu = (title, result) => {
+  let query = "SELECT * FROM makanan WHERE status != 'Habis'";
+
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
 Tutorial.getAll = (title, result) => {
   let query = "SELECT * FROM makanan";
 
@@ -80,10 +138,29 @@ Tutorial.getAll = (title, result) => {
   });
 };
 
+Tutorial.getLast = (title,result) => {
+  let query = `SELECT MAX(id) as lastid FROM makanan`;
+
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+   
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
 Tutorial.updateById = (id, tutorial, result) => {
   sql.query(
-    "UPDATE makanan SET nama = ?, deskripsi = ?, hargaasli = ?, hargapalsu = ?, file = ? WHERE id = ?",
-    [tutorial.nama, tutorial.deskripsi, tutorial.hargaasli, tutorial.hargapalsu, tutorial.file, id],
+    "UPDATE makanan SET nama = ?, deskripsi = ?, hargaasli = ?, hargapalsu = ?, status = ?, file = ? WHERE id = ?",
+    [tutorial.nama, tutorial.deskripsi, tutorial.hargaasli, tutorial.hargapalsu, tutorial.status, tutorial.file, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

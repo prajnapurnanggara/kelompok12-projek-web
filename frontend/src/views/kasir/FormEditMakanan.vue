@@ -69,6 +69,18 @@
                     />
                   </div>
                   <div class="form-group mt-3">
+                    <label><strong>Status</strong></label>
+                    <select
+                      id="Select"
+                      class="form-select mt-1"
+                      v-model="product.status"
+                    >
+                      <option>Best Seller</option>
+                      <option>Tersedia</option>
+                      <option>Habis</option>
+                    </select>
+                  </div>
+                  <div class="form-group mt-3">
                     <label><strong>Foto</strong></label>
                     <br />
                     <img
@@ -92,6 +104,13 @@
                     </span>
                   </div>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button
+                      type="submit"
+                      class="btn btn-danger mt-4"
+                      @click="delProduct"
+                    >
+                      <strong>Delete</strong>
+                    </button>
                     <button type="submit" class="btn btn-warning mt-4">
                       <strong>Ubah</strong>
                     </button>
@@ -127,6 +146,7 @@ export default {
         deskripsi: "",
         hargaasli: "",
         hargapalsu: "",
+        status: "",
       },
       file: "",
     };
@@ -142,6 +162,7 @@ export default {
         deskripsi: this.product.deskripsi,
         hargaasli: this.product.hargaasli,
         hargapalsu: this.product.hargapalsu,
+        status: this.product.status,
         file: this.file,
       };
 
@@ -160,6 +181,12 @@ export default {
     onFileSelected(e) {
       this.file = e.target.files[0].name;
       console.log(typeof this.files);
+    },
+    delProduct() {
+      this.products;
+      axios.delete(
+        `http://localhost:8080/api/makanan/${this.$route.params.id}`
+      );
     },
   },
   mounted() {

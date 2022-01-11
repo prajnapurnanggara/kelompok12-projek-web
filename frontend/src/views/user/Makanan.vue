@@ -76,7 +76,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/makanan")
+      .get("http://localhost:8080/api/makanan/menu")
       .then((response) => this.setProducts(response.data))
       .catch((error) => console.log("Gagal", error));
   },

@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     deskripsi: req.body.deskripsi,
     hargaasli: req.body.hargaasli,
     hargapalsu: req.body.hargapalsu,
+    status: req.body.status,
     file: req.body.file,
   });
 
@@ -44,6 +45,45 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findBestseller = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getBestseller(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
+};
+
+exports.findTersedia = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getTersedia(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
+};
+
+exports.findMenu = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getMenu(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
+};
+
 // Find a single Tutorial with a id
 exports.findOne = (req, res) => {
     Tutorial.findById(req.params.id, (err, data) => {
@@ -59,6 +99,19 @@ exports.findOne = (req, res) => {
           }
         } else res.send(data);
     });
+};
+
+exports.findLast = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getLast(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
 };
 
 // Find a single Tutorial with a id
