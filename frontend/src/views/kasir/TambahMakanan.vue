@@ -35,18 +35,5 @@ export default {
     CardTambahMakanan,
     Footer
   },
-data() {
-    return {
-      products: [],
-      search: [],
-    };
-  },
-  methods: {
-    setProducts(data) {
-      this.products = data;
-    },
-  },
-  mounted() {
-  },
 };
 </script>

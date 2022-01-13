@@ -54,6 +54,19 @@
           />
         </div>
         <div class="form-group mt-3">
+          <label for="status"><strong>Status</strong></label>
+          <select
+            id="Select"
+            class="form-select mt-1"
+            name="status"
+            v-model="product.status"
+          >
+            <option>Best Seller</option>
+            <option>Tersedia</option>
+            <option>Habis</option>
+          </select>
+        </div>
+        <div class="form-group mt-3">
           <label><strong>Foto</strong></label
           ><br />
 
@@ -91,6 +104,7 @@ export default {
         deskripsi: "",
         hargaasli: "",
         hargapalsu: "",
+        status: "",
       },
       file: "",
       lastid: "",
@@ -105,14 +119,13 @@ export default {
         deskripsi: this.product.deskripsi,
         hargaasli: this.product.hargaasli,
         hargapalsu: this.product.hargapalsu,
+        status: this.product.status,
         file: this.file,
       };
 
       axios
         .post("http://localhost:8080/api/makanan", product)
-        .then(function (response) {
-          console.log(response);
-        })
+        .then((response) => this.$router.push ("/editmakanan") (response.data))
         .catch(function (error) {
           console.log(error);
         });
@@ -125,6 +138,7 @@ export default {
       this.lastid = lastdata;
     },
   },
+
   mounted() {
     axios
       .get("http://localhost:8080/api/makanan/last")

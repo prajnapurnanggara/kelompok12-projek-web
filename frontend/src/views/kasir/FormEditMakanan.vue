@@ -171,9 +171,7 @@ export default {
           `http://localhost:8080/api/makanan/${this.$route.params.id}`,
           product
         )
-        .then(function (response) {
-          console.log(response);
-        })
+        .then((response) => this.$router.push("/editmakanan")(response.data))
         .catch(function (error) {
           console.log(error);
         });
@@ -183,10 +181,11 @@ export default {
       console.log(typeof this.files);
     },
     delProduct() {
-      this.products;
-      axios.delete(
-        `http://localhost:8080/api/makanan/${this.$route.params.id}`
-      );
+      axios.delete (`http://localhost:8080/api/makanan/${this.$route.params.id}`)
+        .then((response) => this.$router.push("/editmakanan")(response.data))
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
   mounted() {
