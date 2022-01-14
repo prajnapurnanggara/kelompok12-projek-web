@@ -50,10 +50,10 @@
 
           <div class="row justify-content-end">
             <div class="col-3">
-              <form>
+              <form v-for="id in ids" :key="id.idpesanan">
                 <div class="form-group mt-3">
-                  <label><strong>ID Pesanan</strong></label>
-                  <input type="Text" class="form-control mt-1" />
+                  <label><strong>ID</strong></label>
+                  <input type="Text" class="form-control mt-1" v-model="ids.idpesanan"/>
                 </div>
                 <div class="form-group mt-3">
                   <label><strong>Nama</strong></label>
@@ -94,34 +94,20 @@ export default {
     return {
       keranjangs: [],
       jumlah: [],
+      ids: [],
     };
   },
-  datapesanan() {
-    return {
-      product: {
-        idpesanan: "",
-        makanan: "",
-        harga: "",
-        jumlah: "",
-        totalharga: "",
-      },
-    };
-  },
+
   methods: {
     setKeranjangs(data) {
       this.keranjangs = data;
     },
-    addProduct() {
-      const product = {
-        idpesanan: this.product.idpesanan,
-        nama: this.product.nama,
-        jumlah: this.product.jumlah,
-        totalharga: this.product.totalharga,
-        catatan: this.product.catatan,
-      };
-
+    setLast(data) {
+      this.ids = data;
+    },
+    addPesanan() {
       axios
-        .post("http://localhost:8080/api/makananpesanan", product)
+        .post("http://localhost:8080/api/makananpesanan")
         .then((response) => this.$router.push("/home")(response))
         .catch(function (error) {
           console.log(error);
@@ -130,8 +116,13 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/keranjang/")
+      .get("http://localhost:8080/api/keranjang")
       .then((response) => this.setKeranjangs(response.data))
+      .catch((error) => console.log("Gagal", error));
+
+    axios
+      .get("http://localhost:8080/api/keranjang/last")
+      .then((response) => this.setLast(response.data))
       .catch((error) => console.log("Gagal", error));
   },
 };

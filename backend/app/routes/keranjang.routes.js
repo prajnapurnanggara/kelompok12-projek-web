@@ -15,5 +15,9 @@ module.exports = app => {
   // Delete a Tutorial with id
   router.delete("/:id", tutorials.delete);
 
+  // Retrieve all Tutorials
+  router.get("/last", tutorials.findLast);
+
+
   app.use('/api/keranjang', router);
 };

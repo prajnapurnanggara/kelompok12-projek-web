@@ -37,7 +37,7 @@
         >
           <li class="nav-item">
             <router-link class="nav-link" to="/pesananku">
-              <span class="badge bg-warning">{{ keranjang.jumlah}}</span>
+              <span class="badge bg-warning">{{ keranjang.jumlah }}</span>
             </router-link>
           </li>
         </ul>

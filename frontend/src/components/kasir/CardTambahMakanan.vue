@@ -107,14 +107,14 @@ export default {
         status: "",
       },
       file: "",
-      lastid: "",
     };
   },
-  id() {
+  lastdata() {
     return {
-      lastid: []
+      lastids: []
     };
   },
+  
 
   methods: {
     addProduct() {
@@ -139,8 +139,8 @@ export default {
       this.file = e.target.files[0].name;
       console.log(typeof this.files);
     },
-    setLast(id) {
-      this.lastid = id;
+    setLast(lastdata) {
+      this.lastids = lastdata;
     },
   },
 
@@ -149,7 +149,6 @@ export default {
       .get("http://localhost:8080/api/makanan/last")
       .then((response) => this.setLast(response.data))
       .catch((error) => console.log("Gagal", error));
-      console.log(this.lastid);
   },
 };
 </script>

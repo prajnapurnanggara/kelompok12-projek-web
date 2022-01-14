@@ -138,13 +138,13 @@ Tutorial.getAll = (title, result) => {
   });
 };
 
-Tutorial.getLast = (title,result) => {
-  let query = `SELECT MAX(id) as lastid FROM makanan`;
+Tutorial.getLast = (title, result) => {
+  let query = "SELECT MAX(id) AS id FROM makanan";
 
   if (title) {
-    query += ` WHERE title LIKE '%${title}%'`;
+    query += ` WHERE makanan LIKE '%${title}%'`;
   }
-   
+
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);

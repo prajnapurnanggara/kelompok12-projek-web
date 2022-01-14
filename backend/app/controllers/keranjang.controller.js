@@ -72,3 +72,16 @@ exports.delete = (req, res) => {
         } else res.send({ message: `Makanan Dengan ID ${req.params.id} Berhasil Dihapus` });
     });
 };
+
+exports.findLast = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getLast(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
+};
