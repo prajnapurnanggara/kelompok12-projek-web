@@ -10,7 +10,7 @@
               >Tambah Makanan</router-link
             >
           </div>
-          <table class="table table-hover mt-2" @submit.prevent="delProduct">
+          <table class="table table-hover mt-2">
             <thead>
               <tr>
                 <th scope="col" width="3%">ID</th>
@@ -77,10 +77,6 @@ export default {
   methods: {
     setProducts(data) {
       this.products = data;
-    },
-    delProducts() {
-      this.products
-      axios.delete(`http://localhost:8080/api/makanan/`);
     },
   },
   mounted() {

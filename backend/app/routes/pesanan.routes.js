@@ -9,6 +9,9 @@ module.exports = app => {
   // Get All
   router.get("/", tutorials.findAll);
 
+  // Get All
+  router.get("/keranjang", tutorials.findKeranjang);
+
   // Get Status Dipesan
   router.get("/dipesan", tutorials.findDipesan);
 

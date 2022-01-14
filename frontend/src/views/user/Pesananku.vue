@@ -7,45 +7,37 @@
           <div class="col">
             <h2>Pesananku</h2>
           </div>
-          <table class="table">
+          <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col" width="2%">#</th>
-                <th scope="col"></th>
                 <th scope="col">Makanan</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Jumlah</th>
                 <th scope="col">Total Harga</th>
                 <th scope="col">Catatan</th>
-                <th scope="col" width="2%"></th>
+                <th scope="col"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-for="keranjang in keranjangs" :key="keranjang.id">
               <tr>
-                <td scope="col">1</td>
                 <td>
-                  <img
-                    src="https://i.ytimg.com/vi/9qYtYm7HddM/maxresdefault.jpg"
-                    width="200"
-                    class="img-fluid shadow"
-                  />
+                  {{ keranjang.makanan }}
                 </td>
-                <td>Tipat Cantok</td>
-                <td>Rp 10.000</td>
-                <td>3</td>
-                <td>Rp 30.000</td>
-                <td>1 tanpa sayur kangkung, semuanya cabe 2</td>
+                <td>Rp. {{ keranjang.harga }}</td>
+                <td>{{ keranjang.jumlah }}</td>
+                <td>Rp. {{ keranjang.harga * keranjang.jumlah }}</td>
+                <td>{{ keranjang.catatan }}</td>
                 <td>
-                  <a class="btn btn-icon btn-outline-danger"
+                  <router-link
+                    class="btn btn-icon btn-outline-danger"
+                    :to="'/deletekeranjang/' + keranjang.id"
                     ><i class="fas fa-trash"></i
-                  ></a>
+                  ></router-link>
                 </td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -59,6 +51,10 @@
           <div class="row justify-content-end">
             <div class="col-3">
               <form>
+                <div class="form-group mt-3">
+                  <label><strong>ID Pesanan</strong></label>
+                  <input type="Text" class="form-control mt-1" />
+                </div>
                 <div class="form-group mt-3">
                   <label><strong>Nama</strong></label>
                   <input type="Text" class="form-control mt-1" />
@@ -86,12 +82,57 @@
 // @ is an alias to /src
 import Navbar from "../../components/user/Navbar.vue";
 import Footer from "@/components/user/Footer.vue";
+import axios from "axios";
 
 export default {
   name: "Pesananku",
   components: {
     Navbar,
     Footer,
+  },
+  data() {
+    return {
+      keranjangs: [],
+      jumlah: [],
+    };
+  },
+  datapesanan() {
+    return {
+      product: {
+        idpesanan: "",
+        makanan: "",
+        harga: "",
+        jumlah: "",
+        totalharga: "",
+      },
+    };
+  },
+  methods: {
+    setKeranjangs(data) {
+      this.keranjangs = data;
+    },
+    addProduct() {
+      const product = {
+        idpesanan: this.product.idpesanan,
+        nama: this.product.nama,
+        jumlah: this.product.jumlah,
+        totalharga: this.product.totalharga,
+        catatan: this.product.catatan,
+      };
+
+      axios
+        .post("http://localhost:8080/api/makananpesanan", product)
+        .then((response) => this.$router.push("/home")(response))
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    axios
+      .get("http://localhost:8080/api/keranjang/")
+      .then((response) => this.setKeranjangs(response.data))
+      .catch((error) => console.log("Gagal", error));
   },
 };
 </script>

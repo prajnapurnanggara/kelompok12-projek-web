@@ -43,6 +43,25 @@ Tutorial.getAll = (title, result) => {
   });
 };
 
+Tutorial.getKeranjang = (title, result) => {
+  let query = "SELECT * FROM keranjang";
+
+  if (title) {
+    query += ` WHERE makanan LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
 Tutorial.getDipesan = (title, result) => {
   let query = "SELECT * FROM pesanan WHERE status = 'Dipesan'";
 

@@ -43,6 +43,19 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findKeranjang = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getKeranjang(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
+};
+
 exports.findDipesan = (req, res) => {
   const title = req.query.title;
 
