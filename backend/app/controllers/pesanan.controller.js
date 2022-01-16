@@ -11,11 +11,10 @@ exports.create = (req, res) => {
 
   // Create a Tutorial
   const tutorial = new Tutorial({
-    id: req.body.id,
+    idpesanan: req.body.idpesanan,
     nama: req.body.nama,
-    deskripsi: req.body.deskripsi,
-    hargaasli: req.body.hargaasli,
-    hargapalsu: req.body.hargapalsu
+    nomeja: req.body.nomeja,
+    status: req.body.status,
   });
 
   // Save Tutorial in the database
@@ -86,6 +85,19 @@ exports.findSelesai = (req, res) => {
   const title = req.query.title;
 
   Tutorial.getSelesai(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
+};
+
+exports.findCancel = (req, res) => {
+  const title = req.query.title;
+
+  Tutorial.getCancel(title, (err, data) => {
     if (err)
       res.status(500).send({
         message:

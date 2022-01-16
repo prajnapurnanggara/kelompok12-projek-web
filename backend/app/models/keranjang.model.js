@@ -99,4 +99,17 @@ Tutorial.getLast = (title, result) => {
   });
 };
 
+Tutorial.removeAll = result => {
+  sql.query("DELETE FROM keranjang", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log(`deleted ${res.affectedRows} tutorials`);
+    result(null, res);
+  });
+};
+
 module.exports = Tutorial;

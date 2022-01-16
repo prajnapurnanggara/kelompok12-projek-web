@@ -56,15 +56,32 @@
               <form @submit.prevent="addPesanan">
                 <div class="form-group mt-3">
                   <label><strong>ID</strong></label>
-                  <input type="Text" class="form-control mt-1" :value="ids+1" readonly/>
+                  <input
+                    type="Text"
+                    class="form-control mt-1"
+                    :value="ids"
+                    readonly
+                  />
                 </div>
                 <div class="form-group mt-3">
                   <label><strong>Nama</strong></label>
-                  <input type="Text" class="form-control mt-1" />
+                  <input
+                    type="Text"
+                    class="form-control mt-1"
+                    id="nama"
+                    name="nama"
+                    v-model="pesanan.nama"
+                  />
                 </div>
                 <div class="form-group mt-3">
                   <label><strong>Nomer Meja</strong></label>
-                  <input type="number" class="form-control mt-1" />
+                  <input
+                    type="number"
+                    class="form-control mt-1"
+                    id="nomeja"
+                    name="nomeja"
+                    v-model="pesanan.nomeja"
+                  />
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <button type="submit" class="btn btn-warning mt-4">
@@ -95,6 +112,11 @@ export default {
   },
   data() {
     return {
+      pesanan: {
+        idpesanan: "",
+        nama: "",
+        nomeja: "",
+      },
       keranjangs: [],
       jumlah: [],
       ids: "",
@@ -104,9 +126,9 @@ export default {
 
   methods: {
     setKeranjangs(data) {
-      console.log(data);
       data.forEach((item) => {
         let items = {
+          idid: "",
           idpesanan: this.ids,
           id: item.id,
           makanan: item.makanan,
@@ -114,24 +136,47 @@ export default {
           jumlah: item.jumlah,
           totalharga: item.harga * item.jumlah,
           catatan: item.catatan,
+          total: this.total,
         };
         this.keranjangs.push(items);
       });
     },
     setLast(data) {
-      this.ids = data[0].idpesanan;
+      this.ids = data[0].idpesanan + 1;
     },
     addPesanan() {
-      axios
-        .post("http://localhost:8080/api/makananpesanan", this.keranjangs)
-        .then((response) => console.log(response))
-        .catch(function (error) {
-          console.log(error);
-        });
+      this.keranjangs.forEach((item) => {
+        console.log(item.id);
+        axios
+          .post("http://localhost:8080/api/makananpesanan", {
+            idid: "",
+            idpesanan: this.ids,
+            id: item.id,
+            makanan: item.makanan,
+            harga: item.harga,
+            jumlah: item.jumlah,
+            totalharga: item.totalharga,
+            catatan: item.catatan,
+            total: this.total,
+          })
+          .then((response) => console.log(response))
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+      const pesanan = {
+        idpesanan: this.ids,
+        nama: this.pesanan.nama,
+        nomeja: this.pesanan.nomeja,
+        status: "Dipesan",
+      };
+      axios.post("http://localhost:8080/api/pesanan", pesanan);
+      axios.delete("http://localhost:8080/api/keranjang")
+      .then((response) => this.$router.push("/home")(response.data))
+      ;
     },
     setTotal() {
       this.keranjangs.forEach((item) => {
-        console.log(item.harga);
         this.total = parseInt(this.total + item.totalharga);
       });
     },
@@ -151,7 +196,10 @@ export default {
   mounted() {
     axios
       .get("http://localhost:8080/api/keranjang")
-      .then((response) => {this.setKeranjangs(response.data);this.setTotal()})
+      .then((response) => {
+        this.setKeranjangs(response.data);
+        this.setTotal();
+      })
       .catch((error) => console.log("Gagal", error));
 
     axios
@@ -159,7 +207,6 @@ export default {
       .then((response) => this.setLast(response.data))
       .catch((error) => console.log("Gagal", error));
 
-    console.log(this.ids);
     this.setTotal();
   },
 };

@@ -17,13 +17,15 @@
                 <router-link class="btn btn-warning" to="/selesai"
                   >Selesai</router-link
                 >
+                <router-link class="btn btn-warning" to="/cancel"
+                  >Cancel</router-link
+                >
               </div>
             </div>
           </div>
           <table class="table table-hover mt-2">
             <thead>
               <tr>
-                <th scope="col" width="2%">#</th>
                 <th scope="col">ID Pesanan</th>
                 <th scope="col">Nama</th>
                 <th scope="col" width="10%">No Meja</th>
@@ -33,7 +35,6 @@
             </thead>
             <tbody v-for="pesanan in pesanans" :key="pesanan.idpesanan">
               <tr>
-                <th scope="row">1</th>
                 <td>{{ pesanan.idpesanan }}</td>
                 <td>{{ pesanan.nama }}</td>
                 <td>{{ pesanan.nomeja }}</td>

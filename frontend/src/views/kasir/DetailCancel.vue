@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row mt-4">
           <div class="col">
-            <router-link class="btn btn-md btn-warning" to="/selesai"
+            <router-link class="btn btn-md btn-warning" to="/cancel"
               ><i class="fas fa-arrow-left"></i
             ></router-link>
           </div>
@@ -106,7 +106,7 @@ import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
 
 export default {
-  name: "DetailPesanan",
+  name: "DetailCancel",
   components: {
     Navbar,
     Footer,
@@ -146,7 +146,7 @@ export default {
           `http://localhost:8080/api/pesanan/${this.$route.params.id}`,
           pesanans
         )
-        .then((response) => this.$router.push("/selesai")(response.data))
+        .then((response) => this.$router.push("/cancel")(response.data))
         .catch(function (error) {
           console.log(error);
         });

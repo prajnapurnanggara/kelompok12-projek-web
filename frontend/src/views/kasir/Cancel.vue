@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row mt-4 mb-2">
           <div class="col">
-            <h2>Pesanan - Selesai</h2>
+            <h2>Pesanan - Cancel</h2>
             <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <router-link class="btn btn-warning" to="/pesanan"
@@ -39,14 +39,12 @@
                 <td>{{ pesanan.nama }}</td>
                 <td>{{ pesanan.nomeja }}</td>
                 <td>
-                  <span class="badge rounded-pill bg-success">
-                    {{ pesanan.status }}
-                  </span>
+                  <span class="badge rounded-pill bg-danger"> {{pesanan.status}} </span>
                 </td>
                 <td>
                   <router-link
                     class="btn btn-icon btn-outline-dark"
-                    :to="'/selesai/' + pesanan.idpesanan"
+                    :to="'/cancel/'+pesanan.idpesanan"
                     ><i class="fas fa-pencil-alt"></i
                   ></router-link>
                 </td>
@@ -67,14 +65,14 @@ import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
 
 export default {
-  name: "Selesai",
+  name: "Cancel",
   components: {
     NavbarKasir,
     Footer,
   },
   data() {
     return {
-      pesanans: [],
+      pesanans: []
     };
   },
   methods: {
@@ -84,12 +82,9 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/pesanan/selesai")
+      .get("http://localhost:8080/api/pesanan/cancel")
       .then((response) => this.setPesanans(response.data))
       .catch((error) => console.log("Gagal", error));
   },
 };
 </script>
-
-<style>
-</style>

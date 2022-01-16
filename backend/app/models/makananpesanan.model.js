@@ -1,13 +1,16 @@
 const sql = require("./db.js");
 
 // constructor
-const Tutorial = function(tutorial) {
+const Tutorial = function (tutorial) {
+  this.idid = tutorial.idid;
+  this.id = tutorial.id;
   this.idpesanan = tutorial.idpesanan;
   this.makanan = tutorial.makanan;
   this.harga = tutorial.harga;
   this.jumlah = tutorial.jumlah;
   this.totalharga = tutorial.totalharga;
   this.catatan = tutorial.catatan;
+  this.total = tutorial.total;
 };
 
 Tutorial.create = (newTutorial, result) => {
@@ -18,11 +21,16 @@ Tutorial.create = (newTutorial, result) => {
       return;
     }
 
-    console.log("created tutorial: ", { id: res.insertId, ...newTutorial });
-    result(null, { id: res.insertId, ...newTutorial });
+    console.log("created tutorial: ", {
+      id: res.insertId,
+      ...newTutorial
+    });
+    result(null, {
+      id: res.insertId,
+      ...newTutorial
+    });
   });
 };
-
 
 Tutorial.getAll = (title, result) => {
   let query = "SELECT * FROM makananpesanan";
@@ -40,6 +48,46 @@ Tutorial.getAll = (title, result) => {
 
     console.log("tutorials: ", res);
     result(null, res);
+  });
+};
+
+Tutorial.findById = (id, result) => {
+  sql.query(`SELECT * FROM makananpesanan WHERE idpesanan = ${id}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found tutorial: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Tutorial with the id
+    result({
+      kind: "not_found"
+    }, null);
+  });
+};
+
+Tutorial.findByTotal = (id, result) => {
+  sql.query(`SELECT * FROM makananpesanan WHERE idpesanan = ${id}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found tutorial: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+
+    // not found Tutorial with the id
+    result({ kind: "not_found" }, null);
   });
 };
 

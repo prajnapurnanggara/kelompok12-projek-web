@@ -113,7 +113,7 @@ export default {
   methods: {
     addProduct() {
       const product = {
-        id: this.product.id,
+        id: this.ids,
         nama: this.product.nama,
         deskripsi: this.product.deskripsi,
         hargaasli: this.product.hargaasli,

@@ -21,6 +21,9 @@ module.exports = app => {
   // Get Status Selesai
   router.get("/selesai", tutorials.findSelesai);
 
+  // Get Status Cancel
+  router.get("/cancel", tutorials.findCancel);
+
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 

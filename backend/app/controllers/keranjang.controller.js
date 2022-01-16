@@ -15,7 +15,6 @@ exports.create = (req, res) => {
     makanan: req.body.makanan,
     harga: req.body.harga,
     jumlah: req.body.jumlah,
-    totalharga: req.body.totalharga,
     catatan: req.body.catatan
   });
 
@@ -83,5 +82,16 @@ exports.findLast = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       });
     else res.send(data);
+  });
+};
+
+exports.deleteAll = (req, res) => {
+  Tutorial.removeAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while removing all tutorials."
+      });
+    else res.send({ message: `All Tutorials were deleted successfully!` });
   });
 };

@@ -18,6 +18,9 @@ module.exports = app => {
   // Retrieve all Tutorials
   router.get("/last", tutorials.findLast);
 
+  // Delete all Tutorials
+  router.delete("/", tutorials.deleteAll);
+
 
   app.use('/api/keranjang', router);
 };

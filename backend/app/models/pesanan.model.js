@@ -5,13 +5,11 @@ const Tutorial = function(tutorial) {
   this.idpesanan = tutorial.idpesanan;
   this.nama = tutorial.nama;
   this.nomeja = tutorial.nomeja;
-  this.makanan = tutorial.makanan;
-  this.jumlahmakanan = tutorial.jumlahmakanan;
-  this.catatan = tutorial.catatan;
+  this.status = tutorial.status;
 };
 
 Tutorial.create = (newTutorial, result) => {
-  sql.query("INSERT INTO makanan SET ?", newTutorial, (err, res) => {
+  sql.query("INSERT INTO pesanan SET ?", newTutorial, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -22,7 +20,6 @@ Tutorial.create = (newTutorial, result) => {
     result(null, { id: res.insertId, ...newTutorial });
   });
 };
-
 
 Tutorial.getAll = (title, result) => {
   let query = "SELECT * FROM pesanan";
@@ -119,6 +116,25 @@ Tutorial.getSelesai = (title, result) => {
   });
 };
 
+Tutorial.getCancel = (title, result) => {
+  let query = "SELECT * FROM pesanan WHERE status = 'Cancel'";
+
+  if (title) {
+    query += ` WHERE pesanan LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
 Tutorial.findById = (id, result) => {
   sql.query(`SELECT * FROM pesanan WHERE idpesanan = '${id}'`, (err, res) => {
     if (err) {
@@ -140,8 +156,8 @@ Tutorial.findById = (id, result) => {
 
 Tutorial.updateById = (id, tutorial, result) => {
   sql.query(
-    "UPDATE makanan SET id = ?, deskripsi = ?, hargaasli = ?, hargapalsu = ? WHERE id = ?",
-    [tutorial.id, tutorial.deskripsi, tutorial.hargaasli, tutorial.hargapalsu, id],
+    "UPDATE pesanan SET nama = ?, nomeja = ?, status = ? WHERE idpesanan = ?",
+    [tutorial.nama, tutorial.nomeja, tutorial.status, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

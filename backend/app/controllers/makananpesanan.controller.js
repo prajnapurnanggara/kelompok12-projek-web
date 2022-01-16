@@ -2,8 +2,8 @@ const Tutorial = require("../models/makananpesanan.model.js");
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
-   // Validate request
-   if (!req.body) {
+  // Validate request
+  if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -11,20 +11,22 @@ exports.create = (req, res) => {
 
   // Create a Tutorial
   const tutorial = new Tutorial({
+    idid: req.body.idid,
+    id: req.body.id,
     idpesanan: req.body.idpesanan,
     makanan: req.body.makanan,
     harga: req.body.harga,
     jumlah: req.body.jumlah,
     totalharga: req.body.totalharga,
-    catatan: req.body.catatan
+    catatan: req.body.catatan,
+    total: req.body.total
   });
 
   // Save Tutorial in the database
   Tutorial.create(tutorial, (err, data) => {
     if (err)
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial."
+        message: err.message || "Some error occurred while creating the Tutorial."
       });
     else res.send(data);
   });
@@ -32,14 +34,46 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database (with condition).
 exports.findAll = (req, res) => {
-    const title = req.query.title;
+  const title = req.query.title;
 
-    Tutorial.getAll(title, (err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
-        });
-      else res.send(data);
-    });
+  Tutorial.getAll(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving tutorials."
+      });
+    else res.send(data);
+  });
 };
+
+exports.findOne = (req, res) => {
+  Tutorial.findById(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Makanan Dengan ID ${req.params.id} Tidak Ditemukan.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id " + req.params.id
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.findTotal = (req, res) => {
+  Tutorial.findByTotal(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Makanan Dengan ID ${req.params.id} Tidak Ditemukan.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id " + req.params.id
+        });
+      }
+    } else res.send(data);
+  });
+};
+

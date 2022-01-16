@@ -15,20 +15,34 @@
           <div class="col-md-12">
             <div class="card shadow detail-card">
               <div class="card-body">
-                <h5 class="card-title"><strong>{{ pesanans.idpesanan }}</strong></h5>
+                <h5 class="card-title">
+                  <strong>ID Pesanan : {{ pesanans.idpesanan }}</strong>
+                </h5>
                 <hr />
-                <form>
+                <form @submit.prevent="upPesanans">
                   <div class="form-group mt-3">
                     <label><strong>Nama</strong></label>
-                    <input type="text" class="form-control mt-1" v-model="pesanans.nama"/>
+                    <input
+                      type="text"
+                      class="form-control mt-1"
+                      v-model="pesanans.nama"
+                    />
                   </div>
                   <div class="form-group mt-3">
                     <label><strong>No Meja</strong></label>
-                    <input type="number" class="form-control mt-1" v-model="pesanans.nomeja"/>
+                    <input
+                      type="number"
+                      class="form-control mt-1"
+                      v-model="pesanans.nomeja"
+                    />
                   </div>
                   <div class="form-group mt-3">
                     <label><strong>Status</strong></label>
-                    <select id="Select" class="form-select mt-1" v-model="pesanans.status">
+                    <select
+                      id="Select"
+                      class="form-select mt-1"
+                      v-model="pesanans.status"
+                    >
                       <option>Dipesan</option>
                       <option>Dibayar</option>
                       <option>Selesai</option>
@@ -37,10 +51,9 @@
                   </div>
                   <div class="form-group mt-3">
                     <label><strong>Pesanan</strong></label>
-                    <table class="table tabledetail mt-1">
+                    <table class="table table-hover mt-1">
                       <thead>
                         <tr>
-                          <th scope="col" width="3%">#</th>
                           <th scope="col" width="15%">Makanan</th>
                           <th scope="col" width="10%">Harga</th>
                           <th scope="col" width="7%">Jumlah</th>
@@ -48,14 +61,13 @@
                           <th scope="col" width="50%">Catatan</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody v-for="makanan in makanans" :key="makanan.idid">
                         <tr>
-                          <td scope="col">1</td>
-                          <td>Tipat Cantok</td>
-                          <td>Rp 10.000</td>
-                          <td>3</td>
-                          <td>Rp 30.000</td>
-                          <td>1 tanpa sayur kangkung, semuanya cabe 2</td>
+                          <td>{{ makanan.makanan }}</td>
+                          <td>Rp. {{ makanan.harga }}</td>
+                          <td>{{ makanan.jumlah }}</td>
+                          <td>Rp. {{ makanan.totalharga }}</td>
+                          <td>{{ makanan.catatan }}</td>
                         </tr>
                       </tbody>
                       <tfoot>
@@ -64,16 +76,14 @@
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td></td>
-                          <td><strong>Total : Rp 30.000</strong></td>
+                          <td>
+                            <strong>Total : {{ totals.total }}</strong>
+                          </td>
                         </tr>
                       </tfoot>
                     </table>
                   </div>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" class="btn btn-dark mt-4">
-                      Print
-                    </button>
                     <button type="submit" class="btn btn-warning mt-4">
                       Ubah
                     </button>
@@ -96,19 +106,50 @@ import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
 
 export default {
-  name: "DetailDibayar",
+  name: "DetailPesanan",
   components: {
     Navbar,
     Footer,
   },
   data() {
     return {
-      pesanans: [],
+      pesanans:{
+        idpesanan: "",
+        nama: "",
+        status: ""
+      },
+      makanans: [],
+      totals: '',
     };
   },
   methods: {
     setPesanans(data) {
       this.pesanans = data;
+    },
+    setMakanans(data) {
+      this.makanans = data;
+    },
+    setTotals(data) {
+      this.totals = data;
+    },
+
+    upPesanans() {
+      const pesanans = {
+        idpesanan: this.pesanans.idpesanan,
+        nama: this.pesanans.nama,
+        nomeja: this.pesanans.nomeja,
+        status: this.pesanans.status,
+      };
+
+      axios
+        .put(
+          `http://localhost:8080/api/pesanan/${this.$route.params.id}`,
+          pesanans
+        )
+        .then((response) => this.$router.push("/dibayar")(response.data))
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
   mounted() {
@@ -116,6 +157,20 @@ export default {
       .get("http://localhost:8080/api/pesanan/" + this.$route.params.id)
       .then((response) => this.setPesanans(response.data))
       .catch((error) => console.log("Gagal", error));
+
+    axios
+      .get("http://localhost:8080/api/makananpesanan/" + this.$route.params.id)
+      .then((response) => this.setMakanans(response.data))
+      .catch((error) => console.log("Gagal", error));
+
+    axios
+      .get(
+        "http://localhost:8080/api/makananpesanan/total/" +
+          this.$route.params.id
+      )
+      .then((response) => this.setTotals(response.data))
+      .catch((error) => console.log("Gagal", error));
+      
   },
 };
 </script>
