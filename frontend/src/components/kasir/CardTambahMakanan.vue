@@ -9,9 +9,7 @@
           <input
             type="number"
             class="form-control mt-1" required
-            id="id"
-            name="id"
-            v-model="product.id"
+            :value="ids+1" readonly
           />
         </div>
         <div class="form-group mt-3">
@@ -107,11 +105,7 @@ export default {
         status: "",
       },
       file: "",
-    };
-  },
-  lastdata() {
-    return {
-      lastids: []
+      ids: ""
     };
   },
   
@@ -139,8 +133,8 @@ export default {
       this.file = e.target.files[0].name;
       console.log(typeof this.files);
     },
-    setLast(lastdata) {
-      this.lastids = lastdata;
+    setLast(data) {
+      this.ids = data[0].id;
     },
   },
 

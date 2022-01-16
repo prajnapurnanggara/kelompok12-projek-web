@@ -15,6 +15,7 @@ exports.create = (req, res) => {
     makanan: req.body.makanan,
     harga: req.body.harga,
     jumlah: req.body.jumlah,
+    totalharga: req.body.totalharga,
     catatan: req.body.catatan
   });
 

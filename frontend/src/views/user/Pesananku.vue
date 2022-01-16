@@ -18,8 +18,8 @@
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody v-for="keranjang in keranjangs" :key="keranjang.id">
-              <tr>
+            <tbody>
+              <tr v-for="keranjang in keranjangs" :key="keranjang.idpesanan">
                 <td>
                   {{ keranjang.makanan }}
                 </td>
@@ -28,11 +28,12 @@
                 <td>Rp. {{ keranjang.harga * keranjang.jumlah }}</td>
                 <td>{{ keranjang.catatan }}</td>
                 <td>
-                  <router-link
+                  <button
                     class="btn btn-icon btn-outline-danger"
-                    :to="'/deletekeranjang/' + keranjang.id"
-                    ><i class="fas fa-trash"></i
-                  ></router-link>
+                    @click="delPesanan(keranjang.id)"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -42,7 +43,9 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><strong>Total : Rp 30.000</strong></td>
+                <td>
+                  <strong>Total : Rp {{ total }}</strong>
+                </td>
                 <td></td>
               </tr>
             </tfoot>
@@ -50,10 +53,10 @@
 
           <div class="row justify-content-end">
             <div class="col-3">
-              <form v-for="id in ids" :key="id.idpesanan">
+              <form @submit.prevent="addPesanan">
                 <div class="form-group mt-3">
                   <label><strong>ID</strong></label>
-                  <input type="Text" class="form-control mt-1" v-model="ids.idpesanan"/>
+                  <input type="Text" class="form-control mt-1" :value="ids+1" readonly/>
                 </div>
                 <div class="form-group mt-3">
                   <label><strong>Nama</strong></label>
@@ -94,21 +97,52 @@ export default {
     return {
       keranjangs: [],
       jumlah: [],
-      ids: [],
+      ids: "",
+      total: 0,
     };
   },
 
   methods: {
     setKeranjangs(data) {
-      this.keranjangs = data;
+      console.log(data);
+      data.forEach((item) => {
+        let items = {
+          idpesanan: this.ids,
+          id: item.id,
+          makanan: item.makanan,
+          harga: item.harga,
+          jumlah: item.jumlah,
+          totalharga: item.harga * item.jumlah,
+          catatan: item.catatan,
+        };
+        this.keranjangs.push(items);
+      });
     },
     setLast(data) {
-      this.ids = data;
+      this.ids = data[0].idpesanan;
     },
     addPesanan() {
       axios
-        .post("http://localhost:8080/api/makananpesanan")
-        .then((response) => this.$router.push("/home")(response))
+        .post("http://localhost:8080/api/makananpesanan", this.keranjangs)
+        .then((response) => console.log(response))
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    setTotal() {
+      this.keranjangs.forEach((item) => {
+        console.log(item.harga);
+        this.total = parseInt(this.total + item.totalharga);
+      });
+    },
+    delPesanan(id) {
+      axios
+        .delete(`http://localhost:8080/api/keranjang/${id}`)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$router.go(0);
+          }
+        })
         .catch(function (error) {
           console.log(error);
         });
@@ -117,13 +151,16 @@ export default {
   mounted() {
     axios
       .get("http://localhost:8080/api/keranjang")
-      .then((response) => this.setKeranjangs(response.data))
+      .then((response) => {this.setKeranjangs(response.data);this.setTotal()})
       .catch((error) => console.log("Gagal", error));
 
     axios
       .get("http://localhost:8080/api/keranjang/last")
       .then((response) => this.setLast(response.data))
       .catch((error) => console.log("Gagal", error));
+
+    console.log(this.ids);
+    this.setTotal();
   },
 };
 </script>

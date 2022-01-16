@@ -6,7 +6,6 @@ const Tutorial = function(tutorial) {
   this.makanan = tutorial.makanan;
   this.harga = tutorial.harga;
   this.jumlah = tutorial.jumlah;
-  this.totalharga = tutorial.totalharga;
   this.catatan = tutorial.catatan;
 };
 
