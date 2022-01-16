@@ -9,7 +9,7 @@
           <input
             type="number"
             class="form-control mt-1" required
-            :value="ids+1" readonly
+            :value="ids" readonly
           />
         </div>
         <div class="form-group mt-3">
@@ -134,7 +134,7 @@ export default {
       console.log(typeof this.files);
     },
     setLast(data) {
-      this.ids = data[0].id;
+      this.ids = data[0].id+1;
     },
   },
 

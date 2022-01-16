@@ -9,25 +9,6 @@
           </div>
         </div>
 
-        <div class="row justify-content-center">
-          <div class="col-6">
-            <div class="input-group mb-3">
-              <input
-                v-model="search"
-                type="text"
-                class="form-control"
-                placeholder="Mau makan apa hari ini?"
-                aria-label="Mau makan apa hari ini?"
-                aria-describedby="button-addon2"
-                @keyup="searchFood"
-              />
-              <button class="btn btn-warning" type="button" id="button-addon2">
-                Cari
-              </button>
-            </div>
-          </div>
-        </div>
-
         <div class="row mb-3">
           <div
             class="col-md-3 mt-4"

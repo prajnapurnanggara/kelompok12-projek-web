@@ -104,6 +104,7 @@ import Navbar from "../../components/user/Navbar.vue";
 import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
 
+
 export default {
   name: "Pesananku",
   components: {
@@ -172,8 +173,7 @@ export default {
       };
       axios.post("http://localhost:8080/api/pesanan", pesanan);
       axios.delete("http://localhost:8080/api/keranjang")
-      .then((response) => this.$router.push("/home")(response.data))
-      ;
+      .then((response) => this.$router.push("/home")(response.data));
     },
     setTotal() {
       this.keranjangs.forEach((item) => {

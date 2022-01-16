@@ -6,7 +6,7 @@
         <Hero />
         <div class="row mt-4 mb-2">
           <div class="col">
-            <h2><strong>Makanan Terlaris</strong></h2>
+            <h2>Makanan <strong>Terlaris</strong></h2>
           </div>
           <div class="col-2">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
