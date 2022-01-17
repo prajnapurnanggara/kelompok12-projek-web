@@ -70,6 +70,7 @@
 import Navbar from "../../components/user/Navbar.vue";
 import Footer from "../../components/user/Footer.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "DetailMakanan",
@@ -103,12 +104,22 @@ export default {
         catatan: this.item.catatan,
       };
 
-      axios
-        .post("http://localhost:8080/api/keranjang", item)
-        .then((response) => this.$router.push("/makanan")(response))
-        .catch(function (error) {
-          console.log(error);
-        });
+      axios.post("http://localhost:8080/api/keranjang", item);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Makanan berhasil masuk keranjang",
+      }).then((response) => this.$router.push("/makanan")(response));
     },
   },
   mounted() {

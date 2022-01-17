@@ -103,6 +103,7 @@
 import Navbar from "../../components/user/Navbar.vue";
 import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 export default {
@@ -172,8 +173,13 @@ export default {
         status: "Dipesan",
       };
       axios.post("http://localhost:8080/api/pesanan", pesanan);
-      axios.delete("http://localhost:8080/api/keranjang")
-      .then((response) => this.$router.push("/home")(response.data));
+      axios.delete("http://localhost:8080/api/keranjang");
+      Swal.fire({
+        icon: "success",
+        title: "Berhasil",
+        text: "Makananmu berhasil dipesan, silahkan ke kasir untuk melanjutkan pembayaran",
+        timer: 4000,
+      }).then((response) => this.$router.push("/home")(response));
     },
     setTotal() {
       this.keranjangs.forEach((item) => {

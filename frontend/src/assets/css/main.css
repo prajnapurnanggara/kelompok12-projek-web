@@ -32,7 +32,7 @@
     border-radius: 20px;
 }
 
-.btn-danger {
+.btn-delete {
     border-radius: 20px;
 }
 
@@ -102,4 +102,8 @@
 
 .upload {
     display: none;
+}
+
+.swal-button {
+    background-color: #ffc107;
 }

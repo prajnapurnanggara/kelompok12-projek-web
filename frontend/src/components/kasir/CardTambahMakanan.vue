@@ -8,15 +8,18 @@
           <label for="id"><strong>ID</strong></label>
           <input
             type="number"
-            class="form-control mt-1" required
-            :value="ids" readonly
+            class="form-control mt-1"
+            required
+            :value="ids"
+            readonly
           />
         </div>
         <div class="form-group mt-3">
           <label for="nama"><strong>Nama</strong></label>
           <input
             type="text"
-            class="form-control mt-1" required
+            class="form-control mt-1"
+            required
             id="nama"
             name="nama"
             v-model="product.nama"
@@ -25,7 +28,8 @@
         <div class="form-group mt-3">
           <label for="deskripsi"><strong>Deskripsi</strong></label>
           <textarea
-            class="form-control mt-1" required
+            class="form-control mt-1"
+            required
             id="deskripsi"
             name="deskripsi"
             v-model="product.deskripsi"
@@ -35,7 +39,8 @@
           <label for="hargaasli"><strong>Harga Asli</strong></label>
           <input
             type="number"
-            class="form-control mt-1" required
+            class="form-control mt-1"
+            required
             id="hargaasli"
             name="hargaasli"
             v-model="product.hargaasli"
@@ -45,7 +50,8 @@
           <label for="hargapalsu"><strong>Harga Palsu</strong></label>
           <input
             type="number"
-            class="form-control mt-1" required
+            class="form-control mt-1"
+            required
             id="hargapalsu"
             name="hargapalsu"
             v-model="product.hargapalsu"
@@ -55,7 +61,8 @@
           <label for="status"><strong>Status</strong></label>
           <select
             id="Select"
-            class="form-select mt-1" required
+            class="form-select mt-1"
+            required
             name="status"
             v-model="product.status"
           >
@@ -71,7 +78,8 @@
           <label class="btn-sm btn-warning mt-2"
             ><strong>Upload Foto</strong>
             <input
-              class="form-control upload" required
+              class="form-control upload"
+              required
               type="file"
               name="file"
               id="file"
@@ -92,6 +100,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -105,10 +114,9 @@ export default {
         status: "",
       },
       file: "",
-      ids: ""
+      ids: "",
     };
   },
-  
 
   methods: {
     addProduct() {
@@ -122,19 +130,19 @@ export default {
         file: this.file,
       };
 
-      axios
-        .post("http://localhost:8080/api/makanan", product)
-        .then((response) => this.$router.push ("/editmakanan") (response))
-        .catch(function (error) {
-          console.log(error);
-        });
+      axios.post("http://localhost:8080/api/makanan", product);
+      Swal.fire({
+        icon: "success",
+        title: "Makanan Berhasil Ditambahkan",
+        confirmButtonText: "Ok"
+      }).then((response) => this.$router.push("/editmakanan")(response));
     },
     onFileSelected(e) {
       this.file = e.target.files[0].name;
       console.log(typeof this.files);
     },
     setLast(data) {
-      this.ids = data[0].id+1;
+      this.ids = data[0].id + 1;
     },
   },
 

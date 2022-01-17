@@ -105,8 +105,8 @@
                   </div>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button
-                      type="submit"
-                      class="btn btn-danger mt-4"
+                      type="button"
+                      class="btn btn-danger btn-delete mt-4"
                       @click="delProduct"
                     >
                       <strong>Delete</strong>
@@ -131,6 +131,7 @@
 import Navbar from "../../components/kasir/NavbarKasir.vue";
 import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "FormEditMakanan",
@@ -171,20 +172,55 @@ export default {
           `http://localhost:8080/api/makanan/${this.$route.params.id}`,
           product
         )
-        .then((response) => this.$router.push("/editmakanan")(response.data))
-        .catch(function (error) {
-          console.log(error);
-        });
+        Swal.fire({
+        icon: "success",
+        title: "Makanan Berhasil Diubah",
+        confirmButtonText: "Ok"
+      }).then((response) => this.$router.push("/editmakanan")(response));
     },
     onFileSelected(e) {
       this.file = e.target.files[0].name;
       console.log(typeof this.files);
     },
     delProduct() {
-      axios.delete (`http://localhost:8080/api/makanan/${this.$route.params.id}`)
-        .then((response) => this.$router.push("/editmakanan")(response.data))
-        .catch(function (error) {
-          console.log(error);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Yakin ingin menghapus makanan?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Delete",
+          cancelButtonText: "Cancel",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            axios
+              .delete(`http://localhost:8080/api/makanan/${this.$route.params.id}`)
+              .then(() => {
+                swalWithBootstrapButtons.fire(
+                  "Terhapus!",
+                  "Makanan berhasil dihapus",
+                  "success"
+                );
+              this.$router.push("/editmakanan")
+              })
+              .catch((err) => console.log(err));
+          } else if (
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Dibatalkan",
+              "Makananmu masih aman",
+              "error"
+            );
+          }
         });
     },
   },

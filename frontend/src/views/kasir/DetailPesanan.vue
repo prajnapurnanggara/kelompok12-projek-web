@@ -104,6 +104,7 @@
 import Navbar from "../../components/kasir/NavbarKasir.vue";
 import Footer from "@/components/user/Footer.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "DetailPesanan",
@@ -145,11 +146,12 @@ export default {
         .put(
           `http://localhost:8080/api/pesanan/${this.$route.params.id}`,
           pesanans
-        )
-        .then((response) => this.$router.push("/pesanan")(response.data))
-        .catch(function (error) {
-          console.log(error);
-        });
+        );
+        Swal.fire({
+        icon: "success",
+        title: "Pesanan berhasil diubah",
+        confirmButtonText: "Ok"
+      }).then((response) => this.$router.push("/pesanan")(response));
     },
   },
   mounted() {
